@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:39 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 07:25:58 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/01 09:11:56 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ static void
 
 	info = (t_info *)tmp_info;
 	idx = -1;
-	while (!(info->program_finished) && ++idx < info->num_of_philos)
+	while (++idx < info->num_of_philos)
 	{
 		if (sem_wait(info->philos[idx].eat_mutex))
 			return (NULL);
 	}
-	if (idx == info->num_of_philos)
+	if (!info->program_finished)
 	{
+		info->program_finished = 1;
 		if (sem_post(info->someone_dead_mutex))
 			return (NULL);
 	}
-	info->program_finished = 1;
 	return (NULL);
 }
 
@@ -77,6 +77,7 @@ int
 			return (ERR_SEM_DO);
 	}
 	destroy_mutexes(&info);
+	while (1);
 	free_memory(&info);
 	return (0);
 }

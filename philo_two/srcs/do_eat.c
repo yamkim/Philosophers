@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:18 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 07:34:42 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/01 09:11:42 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int
 	show_message(philo, STATUS_EAT);
 	my_sleep(info->time_to_eat, info);
 	++(philo->eat_cnt);
-	if (philo->eat_cnt == info->num_of_must_eat)
+	if (info->num_of_must_eat > 0\
+		&& philo->eat_cnt == info->num_of_must_eat)
 	{
 		philo->eat_finished = 1;
 		if (sem_post(philo->eat_mutex))
