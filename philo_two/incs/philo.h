@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 07:26:35 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 07:33:45 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/03 15:22:53 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void				*run_routine(
 /*
 ** ft_utils.c
 */
+size_t				ft_strlen(
+					const char *str);
 int					ft_atoi(
 					const char *nptr);
 void				ft_putnbr_fd(
@@ -156,14 +158,14 @@ sem_t				*ft_sem_open(
 					int value);
 
 /*
-** destroy_mutexes.c
+** exit_program.c
 */
-void				*destroy_mutexes(
+int					exit_program(
 					t_info *info);
 
 /*
-** free_memory.c
+** print_error.c
 */
-void				free_memory(
-					t_info *info);
+int					print_error(
+					char *str);
 #endif

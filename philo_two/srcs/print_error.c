@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_memory.c                                      :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/01 06:56:37 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 06:56:37 by yekim            ###   ########.fr       */
+/*   Created: 2021/05/03 15:43:45 by yekim             #+#    #+#             */
+/*   Updated: 2021/05/03 15:44:44 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/philo.h"
 
-void
-	free_memory(t_info *info)
+int
+	print_error(char *str)
 {
-	free(info->philos);
+	if (str)
+		write(STDOUT_FILENO, str, ft_strlen(str));
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:39 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 09:11:56 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/03 15:33:29 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,11 @@ int
 {
 	t_info	info;
 
-	init_info(&info, argc, argv);
-	run_threads(&info);
+	if (!(argc == 5 || argc == 6))
+		return (print_error("Error: bad arguments\n"));
+	if (init_info(&info, argc, argv)
+		|| run_threads(&info))
+		return (exit_program(&info) && print_error("Error: fatal\n"));
 	if (sem_wait(info.someone_dead_mutex))
 		return (ERR_SEM_DO);
 	if (sem_post(info.someone_dead_mutex))
@@ -76,8 +79,7 @@ int
 		if (sem_post(info.msg_mutex))
 			return (ERR_SEM_DO);
 	}
-	destroy_mutexes(&info);
+	exit_program(&info);
 	while (1);
-	free_memory(&info);
 	return (0);
 }

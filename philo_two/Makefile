@@ -15,9 +15,9 @@ FUNC = \
 	ft_utils \
 	show_message \
 	ft_sem_open \
-	free_memory \
 	my_sleep \
-	get_cur_time
+	get_cur_time \
+	print_error
 
 SRCDIR = ./srcs
 INCDIR = ./incs
