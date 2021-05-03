@@ -11,12 +11,12 @@ FUNC = \
 	do_eat \
 	do_sleep \
 	do_die \
-	destroy_mutexes \
+	exit_program \
 	ft_utils \
 	show_message \
-	free_memory \
 	my_sleep \
-	get_cur_time
+	get_cur_time \
+	print_error
 
 SRCDIR = ./srcs
 INCDIR = ./incs

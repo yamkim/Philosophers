@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_mutexes.c                                  :+:      :+:    :+:   */
+/*   exit_program.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 07:40:52 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 07:41:16 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/03 15:24:49 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/philo.h"
 
-void
-	*destroy_mutexes(t_info *info)
+static void
+	free_memory(t_info *info)
+{
+	if (info->fork_mutexes != NULL)
+	{
+		free(info->fork_mutexes);
+		info->fork_mutexes = NULL;
+	}
+	if (info->philos != NULL)
+	{
+		free(info->philos);
+		info->philos = NULL;
+	}
+}
+
+int
+	exit_program(t_info *info)
 {
 	int		idx;
 
@@ -25,5 +40,6 @@ void
 		pthread_mutex_destroy(&(info->philos[idx].eat_mutex));
 	pthread_mutex_destroy(&(info->msg_mutex));
 	pthread_mutex_destroy(&(info->someone_dead_mutex));
-	return (NULL);
+	free_memory(info);
+	return (1);
 }

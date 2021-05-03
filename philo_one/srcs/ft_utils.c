@@ -6,11 +6,22 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 07:40:55 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 07:43:04 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/03 15:43:03 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/philo.h"
+
+size_t
+	ft_strlen(const char *str)
+{
+	size_t	ret;
+
+	ret = 0;
+	while (*(str++))
+		++ret;
+	return (ret);
+}
 
 int
 	ft_atoi(const char *nptr)

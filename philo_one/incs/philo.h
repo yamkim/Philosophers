@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 07:47:21 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 10:09:04 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/03 15:41:28 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int					init_info(
 /*
 ** ft_utils.c
 */
+size_t				ft_strlen(const char *str);
 int					ft_atoi(const char *nptr);
 void				ft_putnbr_fd(int n, int fd);
 
@@ -121,13 +122,13 @@ void				return_fork(t_info *info, t_philo *philo);
 void				my_sleep(uint64_t wait_time, t_info *info);
 
 /*
-** destroy_mutexes.c
+** exit_program.c
 */
-void				*destroy_mutexes(t_info *info);
+int					exit_program(t_info *info);
 
 /*
-** free_memory.c
+** print_error.c
 */
-void				free_memory(t_info *info);
+int					print_error(char *str);
 
 #endif
