@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_sleep.c                                         :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/01 06:56:39 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 07:04:15 by yekim            ###   ########.fr       */
+/*   Created: 2021/05/03 15:43:45 by yekim             #+#    #+#             */
+/*   Updated: 2021/05/03 15:44:44 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/philo.h"
 
-void
-	my_sleep(uint64_t wait_time, t_info *info)
+int
+	print_error(char *str)
 {
-	uint64_t	goal_time;
-
-	goal_time = wait_time + get_cur_time();
-	while (goal_time > get_cur_time())
-	{
-		if (info->program_finished)
-			return ;
-		usleep(100);
-	}
+	if (str)
+		write(STDOUT_FILENO, str, ft_strlen(str));
+	return (1);
 }

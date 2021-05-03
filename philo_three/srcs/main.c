@@ -1,39 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/01 06:56:39 by yekim             #+#    #+#             */
+/*   Updated: 2021/05/04 08:41:51 by yekim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/philo.h"
 
-#if 1
 static void
-	*is_all_eat(void *_info)
+	*is_all_eat(void *tmp_info)
 {
 	int		idx;
 	t_info	*info;
 
-	info = (t_info *)_info;
+	info = (t_info *)tmp_info;
 	idx = -1;
 	while (++idx < info->num_of_philos)
 	{
 		if (sem_wait(info->philos[idx].eat_mutex))
 			return (NULL);
 	}
-	if (sem_post(info->someone_dead_mutex))
-		return (NULL);
+	if (!info->program_finished)
+	{
+		info->program_finished = 1;
+		if (sem_post(info->someone_dead_mutex))
+			return (NULL);
+	}
 	return (NULL);
 }
-#endif
 
 int
-	run_philo(t_info *info)
+	run_philos(t_info *info)
 {
 	int			idx;
 	t_philo		philo;
 	pthread_t	tid;
 
-#if 1
 	if (info->num_of_must_eat)
 	{
 		if (pthread_create(&tid, NULL, &is_all_eat, info))
 			return (ERR_INIT_THREAD);
 	}
-#endif
 	idx = -1;
 	info->beg_prog_time = get_cur_time();
 	while (++idx < info->num_of_philos)
@@ -57,40 +69,21 @@ int
 {
 	t_info	info;
 
-	init_info(&info, argc, argv);
-	run_philo(&info);
-
-#if 0
-	if (sem_wait(info.msg_mutex))
-		return (1);
-#endif
+	if (!(argc == 5 || argc == 6))
+		return (print_error("Error: bad arguments\n"));
+	if (init_info(&info, argc, argv)
+		|| run_philos(&info))
+		return (exit_program(&info) && print_error("Error: fatal\n"));
 	if (sem_wait(info.someone_dead_mutex))
-		return (1);
+		return (ERR_SEM_DO);
 	if (sem_post(info.someone_dead_mutex))
-		return (1);
-	usleep(10000);
-	destroy_mutexes(&info);
-	free_memory(&info);
-	pause();
+		return (ERR_SEM_DO);
+	usleep(5 * SEC2MSEC);
+	if (info.msg_mutex_flag)
+	{
+		if (sem_post(info.msg_mutex))
+			return (ERR_SEM_DO);
+	}
+	exit_program(&info);
 	return (0);
 }
-
-#if 0
-static void
-	*is_all_eat(void *_info)
-{
-	int		idx;
-	t_info	*info;
-
-	info = (t_info *)_info;
-	idx = -1;
-	while (++idx < info->num_of_philos)
-	{
-		if (!(info->philos[idx].eat_finished))
-			pthread_mutex_lock(&info->philos[idx].eat_mutex);
-		// unlock! for each philo's eat_mutex  before exit this program
-	}
-	pthread_mutex_unlock(&(info->someone_dead_mutex));
-	return (NULL);
-}
-#endif

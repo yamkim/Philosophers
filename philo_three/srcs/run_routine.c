@@ -1,17 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   run_routine.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/01 06:56:40 by yekim             #+#    #+#             */
+/*   Updated: 2021/05/01 07:02:26 by yekim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../incs/philo.h"
 
-#if 1
 static void
-	*observe_philo_status(void *_philo)
+	*observe_philo_status(void *tmp_philo)
 {
 	t_philo		*philo;
 	t_info		*info;
 	uint64_t	dif_time;
 
-	philo = (t_philo *)_philo; info = philo->info;
-	while(1)
+	philo = (t_philo *)tmp_philo;
+	info = philo->info;
+	while (1)
 	{
-		if (philo->eat_finished)
+		if (info->program_finished || philo->eat_finished)
 			return (NULL);
 		dif_time = get_cur_time() - philo->beg_eat_time;
 		if (!(philo->status == STATUS_EAT) \
@@ -25,24 +37,22 @@ static void
 	}
 	return (NULL);
 }
-#endif
 
-void *run_routine(void *_philo)
+void
+	*run_routine(void *tmp_philo)
 {
 	t_info		*info;
 	t_philo		*philo;
 	pthread_t	tid;
 
-	philo = (t_philo *)_philo;
+	philo = (t_philo *)tmp_philo;
 	info = philo->info;
-#if 1
 	if (pthread_create(&tid, NULL, &observe_philo_status, philo))
 		return (NULL);
 	pthread_detach(tid);
-#endif
 	while (1)
 	{
-		if (philo->eat_finished)
+		if (info->program_finished || philo->eat_finished)
 			return (NULL);
 		if (take_fork(info, philo))
 			return (NULL);
@@ -50,7 +60,7 @@ void *run_routine(void *_philo)
 			return (NULL);
 		if (return_fork(info, philo))
 			return (NULL);
-		if (philo->eat_finished)
+		if (info->program_finished || philo->eat_finished)
 			return (NULL);
 		if (do_sleep(info, philo))
 			return (NULL);

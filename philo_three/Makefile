@@ -15,9 +15,9 @@ FUNC = \
 	ft_utils \
 	show_message \
 	ft_sem_open \
-	free_memory \
 	my_sleep \
-	get_cur_time
+	get_cur_time \
+	print_error
 
 SRCDIR = ./srcs
 INCDIR = ./incs
@@ -30,17 +30,18 @@ OBJS = $(addprefix $(OBJDIR)/, $(TMPSRCS:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	mkdir $(OBJDIR) 2> /dev/null || true
-	$(CC) $(CFLAGS) -I$(INCDIR) -Ipthread -o $@ -c $<
+	@printf "Generating minishell... %-33.33s\r" $@
+	@mkdir $(OBJDIR) 2> /dev/null || true
+	@$(CC) $(CFLAGS) -I$(INCDIR) -Ipthread -o $@ -c $<
 
 clean:
-	$(RM) $(OBJDIR)
+	@$(RM) $(OBJDIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
 
