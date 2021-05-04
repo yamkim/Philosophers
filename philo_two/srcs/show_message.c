@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:40 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 10:19:19 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/04 14:24:17 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ int
 	printf("%lld %d %s\n", dif_time, philo->pos, status_msg);
 	if (status != STATUS_DIE)
 	{
-		info->msg_mutex_flag = 1;
 		if (sem_post(info->msg_mutex))
 			return (ERR_SEM_DO);
 	}
+	else
+		info->msg_mutex_flag = 1;
 	return (0);
 }

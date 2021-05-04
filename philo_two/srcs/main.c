@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:39 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/03 15:33:29 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/04 14:25:53 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,12 @@ int
 		return (ERR_SEM_DO);
 	if (sem_post(info.someone_dead_mutex))
 		return (ERR_SEM_DO);
-	usleep(5 * SEC2MSEC);
+	usleep(50 * SEC2MSEC);
 	if (info.msg_mutex_flag)
 	{
 		if (sem_post(info.msg_mutex))
 			return (ERR_SEM_DO);
 	}
 	exit_program(&info);
-	while (1);
 	return (0);
 }
