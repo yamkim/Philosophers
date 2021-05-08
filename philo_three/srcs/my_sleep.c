@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:39 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 07:04:15 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/08 16:55:41 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,14 @@ void
 {
 	uint64_t	goal_time;
 
+	(void)info;
 	goal_time = wait_time + get_cur_time();
 	while (goal_time > get_cur_time())
 	{
+#if 0
 		if (info->program_finished)
 			return ;
+#endif
 		usleep(100);
 	}
 }

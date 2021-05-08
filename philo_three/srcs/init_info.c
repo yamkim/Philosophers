@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:38 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 07:06:11 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/08 18:17:13 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ static int
 	sem_unlink(SEM_FORK);
 	sem_unlink(SEM_MSG);
 	sem_unlink(SEM_SOMEONE_DEAD);
+	sem_unlink(SEM_FINISHED);
 	if ((info->fork_mutexes = ft_sem_open(SEM_FORK, info->num_of_philos)) < 0
 		|| (info->msg_mutex = ft_sem_open(SEM_MSG, 1)) < 0
 		|| (info->someone_dead_mutex = ft_sem_open(SEM_SOMEONE_DEAD, 1)) < 0
+		|| (info->finished_mutex = ft_sem_open(SEM_FINISHED, 0)) < 0
 		|| init_semaphores_for_philos(info))
 		return (ERR_SEM_OPEN);
 	if (sem_wait(info->someone_dead_mutex))
@@ -83,8 +85,7 @@ int
 	info->time_to_sleep = ft_atoi(argv[4]);
 	info->time_to_sleep = ft_atoi(argv[4]);
 	info->num_of_must_eat = ft_atoi(argv[5]);
-	info->msg_mutex_flag = 0;
-	info->program_finished = 0;
+//	info->program_finished = 0;
 	if (init_philos(info))
 		return (ERR_INIT_INFO);
 	return (init_semaphores(info));

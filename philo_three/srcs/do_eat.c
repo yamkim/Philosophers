@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:18 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 09:11:42 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/08 18:21:05 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int
 	{
 		philo->eat_finished = 1;
 		if (sem_post(philo->eat_mutex))
+			return (ERR_SEM_DO);
+		if (sem_post(info->finished_mutex))
 			return (ERR_SEM_DO);
 	}
 	return (0);

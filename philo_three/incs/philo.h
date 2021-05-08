@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 07:26:35 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/04 08:35:16 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/08 18:02:44 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define SEM_FORK "SEM_FORKS"
 # define SEM_MSG "SEM_MSG"
 # define SEM_SOMEONE_DEAD "SEM_SOMEONE_DEAD"
+# define SEM_FINISHED "SEM_FINISHED"
 
 # define MAX_NUM_OF_PHILOS 200
 
@@ -53,9 +54,8 @@ typedef	struct		s_info
 	uint64_t		time_to_eat;
 	uint64_t		time_to_sleep;
 	int				num_of_must_eat;
-	int				program_finished;
+	sem_t			*finished_mutex;
 	sem_t			*fork_mutexes;
-	int				msg_mutex_flag;
 	sem_t			*msg_mutex;
 	sem_t			*someone_dead_mutex;
 	struct s_philo	*philos;

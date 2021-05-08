@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:40 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/01 10:19:19 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/08 17:50:35 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,11 @@ int
 	info = philo->info;
 	if (sem_wait(info->msg_mutex))
 		return (ERR_SEM_DO);
-	if (info->program_finished)
-	{
-		if (sem_post(info->msg_mutex))
-			return (ERR_SEM_DO);
-		return (0);
-	}
 	dif_time = get_cur_time() - info->beg_prog_time;
 	status_msg = get_status_message(status);
 	printf("%lld %d %s\n", dif_time, philo->pos, status_msg);
 	if (status != STATUS_DIE)
 	{
-		info->msg_mutex_flag = 1;
 		if (sem_post(info->msg_mutex))
 			return (ERR_SEM_DO);
 	}

@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:55:56 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/03 15:34:46 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/08 18:01:20 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int
 	(void)info;
 	sem_unlink(SEM_FORK);
 	sem_unlink(SEM_SOMEONE_DEAD);
+	sem_unlink(SEM_FINISHED);
+	sem_unlink(SEM_MSG);
 	idx = -1;
 	while (++idx < info->num_of_philos)
 	{
@@ -35,7 +37,6 @@ int
 		gen_name_tag(sem_name, SEM_PHILO_EAT, idx);
 		sem_unlink(sem_name);
 	}
-	sem_unlink(SEM_MSG);
 	free_memories(info);
 	return (1);
 }
