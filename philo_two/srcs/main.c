@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:39 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/04 14:25:53 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/10 10:06:57 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int
 {
 	int			idx;
 	void		*philo;
-	pthread_t	tid;
+	pthread_t	*tmp_tid;
 
 	if (info->num_of_must_eat)
 	{
-		if (pthread_create(&tid, NULL, &is_all_eat, info))
+		if (pthread_create(&(info->tid), NULL, &is_all_eat, info))
 			return (ERR_INIT_THREAD);
 	}
 	idx = -1;
@@ -51,9 +51,10 @@ int
 	while (++idx < info->num_of_philos)
 	{
 		philo = (void *)(&info->philos[idx]);
-		if (pthread_create(&tid, NULL, &run_routine, philo))
+		tmp_tid = &(((t_philo *)philo)->tid);
+		if (pthread_create(tmp_tid, NULL, &run_routine, philo))
 			return (ERR_INIT_THREAD);
-		pthread_detach(tid);
+//		pthread_detach(tmp_tid);
 		usleep(100);
 	}
 	return (0);

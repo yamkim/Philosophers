@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 07:47:21 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/03 15:41:28 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/08 15:15:21 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 
 typedef	struct		s_info
 {
+	pthread_t		tid;
 	uint64_t		beg_prog_time;
 	uint64_t		cur_time;
 	int				num_of_philos;
@@ -54,6 +55,7 @@ typedef	struct		s_info
 
 typedef struct		s_philo
 {
+	pthread_t		tid;
 	int				pos;
 	int				status;
 	uint64_t		beg_eat_time;

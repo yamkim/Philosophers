@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 07:40:52 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/04 13:55:39 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/10 09:50:56 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,13 @@ int
 	exit_program(t_info *info)
 {
 	int		idx;
+	int		status;
 
 	idx = -1;
+	while (++idx < info->num_of_philos)
+		pthread_join(info->philos[idx].tid, (void **)&status);
+	if (info->num_of_must_eat)
+		pthread_join(info->tid, (void **)&status);
 	while (++idx < info->num_of_philos)
 		pthread_mutex_destroy(&(info->fork_mutexes[idx]));
 	idx = -1;

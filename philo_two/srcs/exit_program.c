@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:55:56 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/04 14:25:50 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/10 10:07:41 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,16 @@ int
 {
 	int		idx;
 	char	sem_name[255];
+	int		status;
 
 	(void)info;
 	sem_unlink(SEM_FORK);
 	sem_unlink(SEM_SOMEONE_DEAD);
+	idx = -1;
+	while (++idx < info->num_of_philos)
+		pthread_join(info->philos[idx].tid, (void **)&status);
+	if (info->num_of_must_eat)
+		pthread_join(info->tid, (void **)&status);
 	idx = -1;
 	while (++idx < info->num_of_philos)
 	{
