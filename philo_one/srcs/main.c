@@ -6,13 +6,12 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 07:40:56 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/10 09:55:10 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/10 10:04:41 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/philo.h"
 
-#if 1
 static void
 	*is_all_eat(void *tmp_info)
 {
@@ -30,26 +29,27 @@ static void
 	}
 	return (NULL);
 }
-#endif
 
 int
 	run_threads(t_info *info)
 {
 	int			idx;
 	void		*philo;
+	pthread_t	*tmp_tid;
 
 	if (info->num_of_must_eat)
 	{
 		if (pthread_create(&(info->tid), NULL, &is_all_eat, info))
 			return (ERR_INIT_THREAD);
-		pthread_detach(info->tid);
+		pthread_detach(info->tmp_tid);
 	}
 	idx = -1;
 	info->beg_prog_time = get_cur_time();
 	while (++idx < info->num_of_philos)
 	{
 		philo = (void *)(&info->philos[idx]);
-		if (pthread_create(&(((t_philo *)philo)->tid), NULL, &run_routine, philo))
+		tmp_tid = &(((t_philo *)philo)->tid);
+		if (pthread_create(tmp_tid, NULL, &run_routine, philo))
 			return (ERR_INIT_THREAD);
 		usleep(100);
 	}
