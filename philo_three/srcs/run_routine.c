@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:40 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/10 10:32:37 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/10 10:43:19 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,12 @@ void
 	pthread_detach(tid);
 	while (1)
 	{
-		if (philo->eat_finished)
-			exit(0);
 		if (take_fork(info, philo))
 			return (NULL);
 		if (do_eat(info, philo))
 			return (NULL);
 		if (return_fork(info, philo))
 			return (NULL);
-		if (philo->eat_finished)
-			exit(0);
 		if (do_sleep(info, philo))
 			return (NULL);
 	}

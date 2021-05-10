@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:38 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/08 18:17:13 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/10 10:38:43 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int
 	info->time_to_sleep = ft_atoi(argv[4]);
 	info->time_to_sleep = ft_atoi(argv[4]);
 	info->num_of_must_eat = ft_atoi(argv[5]);
-//	info->program_finished = 0;
 	if (init_philos(info))
 		return (ERR_INIT_INFO);
 	return (init_semaphores(info));
