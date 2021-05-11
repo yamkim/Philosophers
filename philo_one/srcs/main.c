@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 07:40:56 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/10 10:04:41 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/11 13:52:38 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int
 	{
 		if (pthread_create(&(info->tid), NULL, &is_all_eat, info))
 			return (ERR_INIT_THREAD);
-		pthread_detach(info->tmp_tid);
+		pthread_detach(info->tid);
 	}
 	idx = -1;
 	info->beg_prog_time = get_cur_time();

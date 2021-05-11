@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 07:26:35 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/10 10:42:12 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/11 14:01:02 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@
 # define USEC2MSEC 0.001
 
 # define SEM_PHILO_EAT "SEM_PHILO_EAT"
-# define SEM_PHILO "SEM_PHILO"
 # define SEM_FORK "SEM_FORKS"
 # define SEM_MSG "SEM_MSG"
 # define SEM_SOMEONE_DEAD "SEM_SOMEONE_DEAD"

@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:39 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/10 10:06:57 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/11 14:05:56 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int
 		tmp_tid = &(((t_philo *)philo)->tid);
 		if (pthread_create(tmp_tid, NULL, &run_routine, philo))
 			return (ERR_INIT_THREAD);
-//		pthread_detach(tmp_tid);
 		usleep(100);
 	}
 	return (0);

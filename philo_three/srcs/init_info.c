@@ -6,7 +6,7 @@
 /*   By: yekim <yekim@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 06:56:38 by yekim             #+#    #+#             */
-/*   Updated: 2021/05/10 10:38:43 by yekim            ###   ########.fr       */
+/*   Updated: 2021/05/11 14:00:39 by yekim            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static int
 	{
 		memset(sem_name, 0, 255);
 		gen_name_tag(sem_name, SEM_PHILO_EAT, idx);
-		info->philos[idx].eat_mutex = ft_sem_open(sem_name, 1);
 		sem_unlink(sem_name);
+		info->philos[idx].eat_mutex = ft_sem_open(sem_name, 1);
 		if ((info->philos[idx].eat_mutex) < 0)
 			return (ERR_SEM_OPEN);
 		if (sem_wait(info->philos[idx].eat_mutex))
