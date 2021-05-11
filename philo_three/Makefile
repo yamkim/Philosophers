@@ -11,7 +11,7 @@ FUNC = \
 	do_eat \
 	do_sleep \
 	do_die \
-	destroy_mutexes \
+	exit_program \
 	ft_utils \
 	show_message \
 	ft_sem_open \
